@@ -1,0 +1,68 @@
+<div class="panel panel-body">
+    <simple-notifications [options]="{position: ['top', 'right'], timeOut: 3000}"></simple-notifications>
+    <div class="panel-heading">
+        {{title}}
+    </div>
+
+    <div class='panel-body'>
+        <div class="row">
+            <div class="col-md-2">Filter By:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" [(ngModel)]='filterBy' />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">Filtered By:</div>
+            <div class="col-md-3">
+                <em>{{filterBy}}</em>
+            </div>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+            <strong>Danger!</strong> {{errorMessage}}.
+        </div>
+
+        <div class="table-responsive">
+            <table class="table" *ngIf='members'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary' style="outline: none" (click)='toggleImages()'>
+                                {{ showImages == true ? 'Hide' : 'Show' }} Images
+                            </button>
+                        </th>
+
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Entry Date</th>
+                        <th>Description</th>
+                        <th>Rating</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let member of members | filterPipe: filterBy'>
+                        <td><img [src]='member.image' [style.width.px]='imageWidth' [style.height.px]='imageHeight' *ngIf='showImages' /></td>
+                        <td><a [routerLink]='["/members", member.memberId]' style="text-decoration: none; color:black">{{member.memberName}}</a></td>
+                        <td>{{member.jobTitle}}</td>
+                        <td>{{member.entryDate | date: 'short'}}</td>
+                        <td>{{member.description}}</td>
+                        <td>
+                            <ai-star [rating]='member.starRating' (emitter)='clickedNestedComponent($event)'></ai-star>
+                        </td>
+                        <td>
+                            <ai-heart [memberId]='member.memberId' (emitter)='clickedVote($event)'></ai-heart>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel">
+            <em>{{receivedData}}</em>
+            <h2>You can now vote every 30 mins. ! :)</h2>
+        </div>
+
+    </div>
+</div>

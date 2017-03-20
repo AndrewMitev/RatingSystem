@@ -1,0 +1,17 @@
+.voteHeart {
+    font-size: 24px !important;  
+    color: lightgray; 
+}
+.votedHeart{
+    font-size: 26px !important;
+    color: darkred;
+}
+.voteHeart:hover{ 
+    animation-name: hearty;
+    animation-duration: 1s; 
+}
+
+@keyframes hearty {
+    from { color: lightgray; }
+    to { color: darkred;  }
+}

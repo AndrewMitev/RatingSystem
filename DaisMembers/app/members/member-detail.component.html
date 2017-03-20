@@ -1,0 +1,26 @@
+<div class="panel panel-body">
+    <div class="panel-heading">
+        {{title}}
+    </div>
+
+    <div class="row" *ngIf='member'>
+        <div class="col-md-6">
+            <img [src]='member.image' style='width: 200px; height: 180px' />
+        </div>
+        <div class="col-md-6">
+            <h3>{{member.memberName}}</h3>
+            <p>{{member.description}}</p>
+            <p>Date Joined: {{member.entryDate | date}}</p>
+        </div>
+    </div>
+
+    <br />
+    <div class="panel">
+        <button class="btn btn-success" (click)='onBack()'>
+            <i class="glyphicon glyphicon-arrow-left"></i> Go Back!
+        </button>
+    </div>
+    <br />
+
+    <ai-comments></ai-comments>
+</div>
